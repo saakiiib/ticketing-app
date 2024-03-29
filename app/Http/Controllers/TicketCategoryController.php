@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TicketCategory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class TicketCategoryController extends Controller
 {
@@ -16,6 +17,23 @@ class TicketCategoryController extends Controller
 
     public function ticketCategoryStore(Request $request)
     {
+        $rules = [
+            'name' => 'required|unique:ticket_categories,name',
+            'description' => 'required',
+        ];
+
+        $messages = [
+            'name.required' => 'Please fill "Category Name" field.',
+            'name.unique' => 'This name was already added.',
+            'description.required' => 'Please fill "Category Description" field.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 303, 'message' => $validator->errors()->first()]);
+        }
+
         $newCategory = new TicketCategory;
         $newCategory->name = $request->name;
         $newCategory->description = $request->description;
@@ -40,6 +58,24 @@ class TicketCategoryController extends Controller
 
     public function ticketCategoryUpdate(Request $request)
     {
+
+         $rules = [
+        'name' => 'required|unique:ticket_categories,name,' . $request->codeid,
+        'description' => 'required',
+        ];
+
+        $messages = [
+            'name.required' => 'Please fill "Category Name" field.',
+            'name.unique' => 'This name was already added.',
+            'description.required' => 'Please fill "Category Description" field.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 303, 'message' => $validator->errors()->first()]);
+        }
+
         $newCategory = TicketCategory::find($request->codeid);
         $newCategory->name = $request->name;
         $newCategory->description = $request->description;

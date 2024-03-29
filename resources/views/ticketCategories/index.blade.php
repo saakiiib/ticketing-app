@@ -7,6 +7,7 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-between my-3">
             <button type="button" class="btn btn-secondary" id="newBtn">Add new</button>
+            <a class="btn btn-secondary" href="{{ route('home') }}">Go To Main Index</a>
             <a class="btn btn-secondary" href="{{ route('ticketIndex') }}">Go To Tickets</a>
         </div>
     </div>

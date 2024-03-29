@@ -6,6 +6,7 @@ use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Models\TicketCategory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class TicketController extends Controller
 {
@@ -18,6 +19,29 @@ class TicketController extends Controller
 
     public function ticketStore(Request $request)
     {
+        $rules = [
+        'category_id' => 'required',
+        'date' => 'required|date',
+        'title' => 'required',
+        'description' => 'required',
+        'status' => 'required',
+        ];
+
+        $messages = [
+            'category_id.required' => 'Please select a category.',
+            'date.required' => 'Please select a date.',
+            'date.date' => 'Date must be a valid date format.',
+            'title.required' => 'Please enter a title.',
+            'description.required' => 'Please enter a description.',
+            'status.required' => 'Please select a status.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 303, 'message' => $validator->errors()->first()]);
+        }
+
         $newTicket = new Ticket;
         $newTicket->category_id = $request->category_id; 
         $newTicket->date = $request->date;
@@ -44,6 +68,31 @@ class TicketController extends Controller
 
     public function ticketUpdate(Request $request)
     {
+
+        $rules = [
+        'category_id' => 'required',
+        'date' => 'required|date',
+        'title' => 'required',
+        'description' => 'required',
+        'status' => 'required|in:1,2,3', // Assuming status can only be 1, 2, or 3
+        ];
+
+        $messages = [
+        'category_id.required' => 'Please select a category.',
+        'date.required' => 'Please select a date.',
+        'date.date' => 'Invalid date format.',
+        'title.required' => 'Please provide a title.',
+        'description.required' => 'Please provide a description.',
+        'status.required' => 'Please select a status.',
+        'status.in' => 'Invalid status value.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+        return response()->json(['status' => 303, 'message' => $validator->errors()->first()]);
+        }
+
         $newTicket = Ticket::find($request->codeid);
         $newTicket->category_id = $request->category_id; 
         $newTicket->date = $request->date;

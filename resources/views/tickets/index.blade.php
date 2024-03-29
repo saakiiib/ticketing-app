@@ -6,6 +6,7 @@
     <div class="container-fluid">
         <div class="d-flex justify-content-between my-3">
         <button type="button" class="btn btn-secondary" id="newBtn">Add new</button>
+        <a class="btn btn-secondary" href="{{ route('home') }}">Go To Main Index</a>
         <a class="btn btn-secondary" href="{{ route('ticketCategoryIndex') }}">Go To Categories</a>
     </div>
 
@@ -27,7 +28,13 @@
                         <form id="createThisForm">
                             @csrf
                             <input type="hidden" class="form-control" id="codeid" name="codeid">
-                            <div class="row">
+                            <div class="row">      
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Date</label>
+                                        <input type="date" class="form-control" id="date" name="date">
+                                    </div>
+                                </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Category</label>
@@ -37,12 +44,6 @@
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Date</label>
-                                        <input type="date" class="form-control" id="date" name="date">
                                     </div>
                                 </div>
                             </div> 
@@ -101,6 +102,7 @@
                             <thead>
                                 <tr>
                                     <th style="text-align: center">Sl</th>
+                                    <th style="text-align: center">Date</th>
                                     <th style="text-align: center">Title</th>
                                     <th style="text-align: center">Description</th>
                                     <th style="text-align: center">Status</th>
@@ -111,6 +113,7 @@
                                 @foreach ($tickets as $key => $ticket)
                                 <tr>
                                     <td style="text-align: center">{{ $key + 1 }}</td>
+                                    <td style="text-align: center">{{ $ticket->date }}</td>
                                     <td style="text-align: center">
                                         {{ $ticket->title }}
                                         @if($ticket->updated_at != $ticket->created_at)
@@ -118,7 +121,7 @@
                                         @endif
                                     </td>
                                     <td style="text-align: center">
-                                        {{ $ticket->description }}
+                                        {!! $ticket->description !!}
                                     </td>                                       
                                     <td style="text-align: center">
                                         @if($ticket->status === 1)
