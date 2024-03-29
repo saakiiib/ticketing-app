@@ -6,9 +6,6 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TicketCategoryController;
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 

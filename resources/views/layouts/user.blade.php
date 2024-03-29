@@ -6,65 +6,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ticketing App</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <link rel="stylesheet" href="{{ asset('assets/admin/plugins/fontawesome-free/css/all.min.css')}}">
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{ asset('assets/admin/css/adminlte.min.css')}}">
   <link rel="stylesheet" href="{{ asset('assets/admin/css/OverlayScrollbars.min.css')}}">
-  <link rel="stylesheet" href="{{ asset('assets/admin/ekko-lightbox/ekko-lightbox.css')}}">
   <link rel="stylesheet" href="{{ asset('assets/admin/datatables/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{ asset('assets/admin/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{ asset('assets/admin/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Custom CSS -->
+  <style>
+    /* Custom styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fff;
+      color: #000;
+    }
+    header {
+      text-align: center;
+      margin: 50px 0;
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+    }
+    .ticket-card {
+      background-color: #fff;
+      border: 1px solid #000;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+    .ticket-card:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .ticket-card .card-body {
+      padding: 20px;
+    }
+    .ticket-card h5 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    .ticket-card p {
+      color: #6c757d;
+    }
+    .view-details-btn {
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .view-details-btn:hover {
+      background-color: #333;
+    }
+    /* Flexbox to fill vertical space */
+    .ticket-card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center horizontally */
+      min-height: 100vh;
+    }
+    .ticket-card-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* Center cards horizontally */
+    }
+    .ticket-card-col {
+      flex: 0 0 calc(50% - 20px); /* Two cards per row with some space */
+      margin: 10px;
+    }
+  </style>
+
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body>
+  <header>
+    <h1>Welcome to Eacy Ticketing System</h1>
+    <p>Explore and manage your tickets here</p>
+  </header>
+
 <div class="wrapper">
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ asset('logo.png')}}" alt="logo" height="60" width="60">
-  </div>
-
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto"> 
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
-    </ul>
-  </nav>
-
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <div class="sidebar">
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{ asset('avatar5.png')}}" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block"></a>
-        </div>
-      </div>
-      @include('inc.sidebar')
-    </div>
-  </aside>
-
-  <div class="content-wrapper">
+  <div class="container">
     @yield('content')
   </div>
 </div>
 
 <script src="{{ asset('assets/admin/js/jquery.min.js')}}"></script>
 <script src="{{ asset('assets/admin/js/jquery-ui.min.js')}}"></script>
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
 <script src="{{ asset('assets/admin/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{ asset('assets/admin/js/jquery.overlayScrollbars.min.js')}}"></script>
 <script src="{{ asset('assets/admin/js/adminlte.js')}}"></script>
 <script src="{{ asset('assets/admin/js/dashboard.js')}}"></script>
-<script src="{{ asset('assets/admin/ekko-lightbox/ekko-lightbox.min.js')}}"></script>
 <script src="{{ asset('assets/admin/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{ asset('assets/admin/datatables/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{ asset('assets/admin/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
@@ -77,6 +105,7 @@
 <script src="{{ asset('assets/admin/datatables-buttons/js/buttons.html5.min.js')}}"></script>
 <script src="{{ asset('assets/admin/datatables-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{ asset('assets/admin/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+
 <script>
 function pagetop() {
     window.scrollTo({

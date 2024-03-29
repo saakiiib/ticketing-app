@@ -4,11 +4,11 @@
 <!-- Main content -->
 <section class="content mt-3" id="newBtnSection">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-2">
-            <button type="button" class="btn btn-secondary my-3" id="newBtn">Add new</button>
-        </div>
-      </div>
+        <div class="d-flex justify-content-between my-3">
+        <button type="button" class="btn btn-secondary" id="newBtn">Add new</button>
+        <a class="btn btn-secondary" href="{{ route('ticketCategoryIndex') }}">Go To Categories</a>
+    </div>
+
     </div>
 </section>
 <!-- /.content -->
@@ -131,7 +131,7 @@
                                     </td>
                                     <td style="text-align: center">
                                         <a class="btn btn-link" id="EditBtn" rid="{{ $ticket->id }}"><i class="fa fa-edit" style="font-size: 20px;"></i></a>
-                                        <a class="btn btn-link" id="deleteBtn" rid="{{ $ticket->id }}"><i class="fa fa-trash-o" style="color: red; font-size: 20px;"></i></a>
+                                        <a class="btn btn-link" id="deleteBtn" rid="{{ $ticket->id }}"><i class="fa fa-trash" style="color: red; font-size: 20px;"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
